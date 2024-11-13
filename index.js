@@ -21,11 +21,12 @@ app.get('/', (req, res) => {
 
 app.get('/vidsrc/:tmdbId', async (req, res) => {
 	const id = req.params.tmdbId
-	const season = req.query.s
-	const episode = req.query.e
+	const season = req.query.season
+	const episode = req.query.episode
+	const media_type = req.query.media_type
 
 	try {
-		if (season && episode) {
+		if (media_type.toLowerCase() === 'tv') {
 			const vidsrcresponse = await getvidsrc(id, season, episode)
 			res.status(200).json(vidsrcresponse)
 		} else {
